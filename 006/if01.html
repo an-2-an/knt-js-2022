@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #picture {
+            width: 250px; height: 300px; box-shadow: 10px 10px 5px grey; margin-bottom: 30px;
+        }
+        #button {
+            font-size: 300%; width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <img id="picture" src="">
+    <br>
+    <button id="button"></button>
+    <script>
+        const LAMP_OFF_IMG = 'https://iconarchive.com/download/i45233/iconleak/stainless/bulb.ico';
+        const LAMP_ON_IMG = 'https://files.softicons.com/download/object-icons/worked-awhile-lights-icons-by-artbees/ico/OnLamp.ico';
+        const BUTTON_OFF_CAPTION = 'ВКЛ.';
+        const BUTTON_ON_CAPTION = 'ВЫКЛ.';
+
+        let is_lamp_on = false;   
+
+        let picture = document.getElementById('picture');
+        let button = document.getElementById('button');
+
+        let view = (state) => {
+            if (state) {
+                picture.src = LAMP_ON_IMG;
+                button.innerHTML = BUTTON_ON_CAPTION;
+            } else {
+                picture.src = LAMP_OFF_IMG;
+                button.innerHTML = BUTTON_OFF_CAPTION;                
+            }
+        }
+
+        view(state=is_lamp_on);
+
+        button.addEventListener('click', () => {
+            is_lamp_on = !is_lamp_on;
+            console.log(is_lamp_on);
+            view(state=is_lamp_on);
+        })        
+
+    </script>
+</body>
+</html>

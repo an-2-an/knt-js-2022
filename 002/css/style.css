@@ -1,0 +1,27 @@
+body {
+    background: url('../img/bg.jpg');
+    background-size: 100%;
+}
+
+h2 {
+    text-align: center;
+}
+
+.main-header {
+    color: green;        
+}
+
+p {
+font-size: 20px;
+}
+
+img.big {
+    width: 150px;
+    box-shadow: 5px 5px 10px grey;
+}
+
+img.small {
+    width: 80px;
+    border: 5px solid green;
+    border-radius: 5px;
+}

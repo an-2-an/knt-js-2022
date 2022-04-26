@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #target {
+            border-collapse: collapse;
+        }
+        #target th, td {
+            padding: 2px 20px 2px 20px;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+    <p>y = 
+        <input type="text" id="function" value="2 * x + 0.3">
+    </p>
+    <button id="btn">TABULATE</button>
+    <table id="target">
+        <tr>
+            <th>x</th>
+            <th>y</th>
+        </tr>
+    </table>
+    <script>
+        var target = document.getElementById("target");
+        var func = document.getElementById("function");
+        var btn = document.getElementById("btn");
+        var x;
+        var step = 0.2;
+        var y;
+        var func_str;
+
+        let handler_btn = () => {
+            x = 0.0;
+            func_str = func.value;
+            target.innerHTML = '';
+            for (let i = 0; i < 11; i++) {            
+                y = eval(func_str);
+                var row = document.createElement("tr");
+                var col_x = document.createElement("td");
+                col_x.innerHTML = x.toFixed(1);
+                var col_y = document.createElement("td");
+                col_y.innerHTML = y.toFixed(3);
+                row.appendChild(col_x);
+                row.appendChild(col_y);
+                target.appendChild(row);     
+                x = x + step;             
+            }
+        }
+        
+        btn.addEventListener('click', handler_btn);
+
+
+    </script>
+</body>
+</html>

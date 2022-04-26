@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            border: 3px solid blue;
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+        }
+        div.left {
+            background-color: crimson;
+            padding-top: 20px;
+        }
+        div.left > h1 {
+            text-align: center;
+            color: white;
+        }
+        div.right {
+            background-color: lightyellow;
+            padding-top: 20px;
+        }
+        div.right > h1 {
+            text-align: center;
+            color: crimson;
+        }
+    </style>
+</head>
+<body>
+    <div class="left">
+        <h1>Don't</h1>
+    </div>
+    <div class="right">
+        <h1>Stop</h1>
+    </div>
+    <br>
+    <div class="left">
+        <h1>Go</h1>
+    </div>
+    <div class="right">
+        <h1>Please</h1>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
