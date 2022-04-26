@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .square {
+            width: 100px; height: 100px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            text-align: center;
+            display: inline-block;
+            margin: 10px;
+            font-size: 400%;
+        }
+        code {
+            font-size: 300%;
+        }
+    </style>
+</head>
+<body>
+    <code>Binary:</code>
+    <div id="target"></div>
+    <code>Decimal:</code>
+    <code id="decimal"></code>
+
+    <script>
+        let target = document.getElementById("target");
+        let decimal = document.getElementById("decimal");
+        let digits = [0, 0, 1, 0, 0, 1, 0, 0];
+        let squares = [];
+
+        let get_decimal = () => {
+            let s = 0;
+            for (let i = 0; i < digits.length; i++) {
+                s = s + digits[i] * 2 ** (digits.length - 1 - i);
+            }
+            return s;
+        };
+
+        for (let index = 0; index < digits.length; index++) {
+            const element = digits[index];
+            let square = document.createElement("div");
+            square.className = "square";
+            // square.innerHTML = String(element);
+            target.appendChild(square);
+            squares.push(square);            
+        }
+        console.log(squares);
+        let draw = () => {
+            digits.forEach((digit, idx) => {
+                // console.log(digit);
+                squares[idx].innerHTML = String(digit);
+                squares[idx].style.backgroundColor = (digit === 1) ? "yellow" : null; 
+            });
+            decimal.innerHTML = String(get_decimal());
+        };
+        draw();
+
+        squares.forEach((square, idx) => {
+            square.addEventListener('click', () => {
+                console.log('click', idx);
+                if (digits[idx] === 0) {
+                    digits[idx] = 1;
+                } else {
+                    digits[idx] = 0;
+                }
+                console.log(digits);
+                draw();
+            });
+        });
+
+    </script>
+</body>
+</html>
