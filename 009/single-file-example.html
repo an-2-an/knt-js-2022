@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    
+    class Language extends React.Component {
+      render() {
+        const styleObject = {
+          'backgroundColor': this.props.color,
+          'width': 200,
+          'padding': 20,
+          'boxShadow': '10px 10px 10px grey',
+          'margin': 20,
+          'display': 'inline-block',
+        };
+        return (
+          <div style={ styleObject }>
+            <h1>{ this.props.lang }</h1>
+            <h3>best language ever</h3>
+          </div>
+          );
+      }
+    }
+
+    class MyApp extends React.Component {
+      render() {
+        return (
+          <div>
+            <Language lang="C++" color="red"/>
+            <Language lang="Java" color="green"/>
+            <Language lang="PHP" color="blue"/>
+          </div>
+        );
+      }
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<MyApp />);
+
+    </script>
+  </body>
+</html>
