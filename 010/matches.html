@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const MATCH_IMG = 'match.png';
+    
+    class Match extends React.Component {
+      render() {
+        const styleObject = {
+          width: 20, 
+          height: 100, 
+          margin: 20,
+        };
+        return (
+            <img style={ styleObject } src='match.png' />
+          );
+      }
+    }
+
+    class Button extends React.Component {
+      render() {
+        const styleObject = {
+          width: 150, 
+          height: 70, 
+          margin: 20,
+          fontSize: '200%',
+        };
+        return (
+            <button onClick={ () => {this.props.handler();} } style={ styleObject }>
+                { this.props.caption }
+            </button>
+          );
+      }
+    }
+
+    class MyApp extends React.Component {
+        
+        constructor() {
+            super();
+            this.state = {
+                num_matches: 15,
+            };
+        }
+
+        handler_button = (num) => {
+            console.log('click', num);
+            alert(`click = ${num}`);
+        }
+
+        get_matches = () => {
+            let matches = [];
+            // let n = 15;
+            for (let index = 0; index < this.state.num_matches; index++) {
+                matches.push(<Match key={index}/>);                
+            }
+            return matches;
+        }
+      
+        render = () => {
+        return (
+          <div>
+            <div>
+                { this.get_matches() }
+            </div>
+            <div>
+                <Button caption="1" handler={ () => this.handler_button(1) }/>
+                <Button caption="2" handler={ () => this.handler_button(2) }/>
+                <Button caption="3" handler={ () => this.handler_button(3) }/>
+            </div>
+          </div>
+        );
+      }
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<MyApp />);
+
+    </script>
+  </body>
+</html>
