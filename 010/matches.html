@@ -55,7 +55,12 @@
 
         handler_button = (num) => {
             console.log('click', num);
-            alert(`click = ${num}`);
+            // alert(`click = ${num}`);
+            let num_matches_new = this.state.num_matches - num;
+            num_matches_new = (num_matches_new < 0) ? 0 : num_matches_new;
+            this.setState({
+              num_matches: num_matches_new,
+            });
         }
 
         get_matches = () => {

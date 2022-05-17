@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+   
+
+    class Cell extends React.Component {
+      render() {
+        const styleObject = {
+          display: "inline-block",
+          width: 150, 
+          height: 150, 
+          margin: 10,
+          fontSize: '600%',
+          border: '1px solid grey',
+          fontFamily: 'Arial',
+          verticalAlign: 'top',
+          textAlign: 'center',
+        };
+        let caption = " ";
+        if (this.props.value === "1") {
+            caption = "X";
+        } else if (this.props.value === "2") {
+            caption = "O";
+        }
+        return (
+            <div onClick={ () => {this.props.handler()} } style={ styleObject }>
+                { caption }
+            </div>
+          );
+      }
+    }
+
+    class MyApp extends React.Component {
+        
+        constructor() {
+            super();
+            this.state = {
+                cells: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                is_x_move: true,
+            };
+        }
+
+        handler = (idx) => {
+            console.log('click', idx);
+            if (this.state.cells[idx] === 0) {
+                let copy_cells = this.state.cells.slice();
+                copy_cells[idx] = (this.state.is_x_move) ? 1 : 2;
+                let copy_is_x_move = !this.state.is_x_move;
+                this.setState({
+                    cells: copy_cells,
+                    is_x_move: copy_is_x_move,
+                });
+            }            
+        }
+      
+        render = () => {
+            const styleObject = {
+                width: 550,
+            }
+        return (
+          <div style={ styleObject }>
+            { 
+                this.state.cells.map((value, idx) => 
+                    <Cell 
+                    key={idx} 
+                    value={String(value)} 
+                    handler={() => {this.handler(idx)}}
+                    />
+                ) 
+            }
+          </div>
+        );
+      }
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<MyApp />);
+
+    </script>
+  </body>
+</html>
