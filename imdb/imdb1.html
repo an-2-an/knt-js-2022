@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+   
+
+    class Movie extends React.Component {
+      render() {
+        const styleObject = {
+          display: "inline-block",
+          width: 200, 
+          height: 350, 
+          margin: 10,
+          paddingTop: 20,
+          fontSize: '100%',
+          border: '1px solid grey',
+          fontFamily: 'Arial',
+          verticalAlign: 'top',
+          textAlign: 'center',
+          borderRadius: 5,
+          boxShadow: '5px 5px 5px green',
+        };
+
+        return (
+            <div style={ styleObject }>
+                <img src={ this.props.movie.poster } width="100" height="120" />
+                <h3>{ this.props.movie.title }</h3>
+                <p>{ this.props.movie.director }</p>
+                <h1>{ this.props.movie.year }</h1>
+            </div>
+          );
+      }
+    }
+
+    class MyApp extends React.Component {
+        
+        constructor() {
+            super();
+            this.state = {
+                movies: [],
+            };
+        }
+
+      componentDidMount() {
+        setTimeout(
+          () => this.takeAPIDataFromDjango(),
+          2000
+        )  
+      }
+
+
+      takeAPIDataFromDjango = async () => {
+          const moviesURL = 'http://127.0.0.1:8001/imdb/api/movie/list/';
+          console.log('TAKE MOVIES FROM DJANGO');  
+          const apiUrl = await fetch(moviesURL, {
+              method: "GET", 
+              headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"}
+              });
+              const data = await apiUrl.json();
+              console.log(data);  
+          this.setState({
+            movies: data,
+          });            
+      }
+      
+        render = () => {
+
+        return (
+          <div>
+            { 
+                this.state.movies.map((value, idx) => 
+                    <Movie 
+                    key={idx} 
+                    movie={value}
+                    />
+                ) 
+            }
+          </div>
+        );
+      }
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<MyApp />);
+
+    </script>
+  </body>
+</html>
